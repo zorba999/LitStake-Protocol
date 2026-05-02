@@ -1,18 +1,24 @@
 import type { Metadata } from 'next'
-import { Outfit, Rajdhani } from 'next/font/google'
+import { Orbitron, Rajdhani, JetBrains_Mono } from 'next/font/google'
 import { Providers } from './providers'
 import './globals.css'
 
-const outfit = Outfit({
+const orbitron = Orbitron({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-sans',
+  weight: ['500', '600', '700', '800', '900'],
+  variable: '--font-display',
 })
 
 const rajdhani = Rajdhani({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-display',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-body',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
@@ -28,9 +34,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${rajdhani.variable}`}>
-        <div className="glow-blob-1" />
-        <div className="glow-blob-2" />
+      <body className={`${orbitron.variable} ${rajdhani.variable} ${jetbrainsMono.variable}`}>
         <Providers>{children}</Providers>
       </body>
     </html>

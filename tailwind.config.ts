@@ -7,54 +7,57 @@ const config: Config = {
     './hooks/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    container: { center: true, padding: '2rem', screens: { '2xl': '1400px' } },
     extend: {
-      fontFamily: {
-        sans:    ['var(--font-sans)', 'sans-serif'],
-        display: ['var(--font-display)', 'sans-serif'],
-      },
       colors: {
-        litvm: {
-          teal:    '#64BFD3',
-          dark:    '#1A616E',
-          navy:    '#1A2A40',
-          wine:    '#302326',
-          heading: '#D0E9FF',
-          muted:   'rgba(255,255,255,0.65)',
-        },
+        border:      'hsl(var(--border))',
+        input:       'hsl(var(--input))',
+        ring:        'hsl(var(--ring))',
+        background:  'hsl(var(--background))',
+        foreground:  'hsl(var(--foreground))',
+        primary:     { DEFAULT: 'hsl(var(--primary))', foreground: 'hsl(var(--primary-foreground))' },
+        secondary:   { DEFAULT: 'hsl(var(--secondary))', foreground: 'hsl(var(--secondary-foreground))' },
+        muted:       { DEFAULT: 'hsl(var(--muted))', foreground: 'hsl(var(--muted-foreground))' },
+        accent:      { DEFAULT: 'hsl(var(--accent))', foreground: 'hsl(var(--accent-foreground))' },
+        destructive: { DEFAULT: 'hsl(var(--destructive))', foreground: 'hsl(var(--destructive-foreground))' },
+        wine:    'hsl(var(--wine))',
+        navy:    'hsl(var(--navy))',
+        success: 'hsl(var(--success))',
+        warning: 'hsl(var(--warning))',
       },
-      backgroundImage: {
-        'litvm-gradient': 'linear-gradient(135deg, #1A616E 0%, #1A2A40 45%, #302326 100%)',
-        'teal-gradient':  'linear-gradient(135deg, #64BFD3 0%, #1A616E 100%)',
-        'card-gradient':  'linear-gradient(135deg, rgba(26,97,110,0.3) 0%, rgba(26,42,64,0.5) 100%)',
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      fontFamily: {
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        body:    ['var(--font-body)',    'system-ui', 'sans-serif'],
+        mono:    ['var(--font-mono)',    'monospace'],
       },
       animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite',
-        'fade-in':    'fadeIn 0.4s ease-out',
-        'float':      'float 5s ease-in-out infinite',
-        'shimmer':    'shimmer 2.5s linear infinite',
+        'pulse-slow':   'pulse 3s cubic-bezier(0.4,0,0.6,1) infinite',
+        'pulse-dot':    'pulse-dot 2s ease-in-out infinite',
+        'fade-up':      'fade-up .7s ease-out both',
+        'grid':         'float-grid 20s linear infinite',
       },
       keyframes: {
-        fadeIn: {
-          '0%':   { opacity: '0', transform: 'translateY(10px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        'pulse-dot': {
+          '0%,100%': { opacity: '1', boxShadow: '0 0 0 0 hsl(var(--success) / 0.6)' },
+          '50%':     { opacity: '.7', boxShadow: '0 0 0 8px hsl(var(--success) / 0)' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%':      { transform: 'translateY(-8px)' },
+        'fade-up': {
+          from: { opacity: '0', transform: 'translateY(14px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
         },
-        shimmer: {
-          '0%':   { backgroundPosition: '-200% center' },
-          '100%': { backgroundPosition: '200% center' },
+        'float-grid': {
+          '0%':   { backgroundPosition: '0 0, 0 0' },
+          '100%': { backgroundPosition: '48px 48px, 48px 48px' },
         },
-      },
-      boxShadow: {
-        'teal-glow': '0 0 30px rgba(100,191,211,0.2)',
-        'teal-sm':   '0 0 12px rgba(100,191,211,0.15)',
-        'card':      '0 4px 24px rgba(0,0,0,0.3)',
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animate')],
 }
 
 export default config

@@ -50,7 +50,13 @@
       "mcp__Claude_in_Chrome__tabs_context_mcp",
       "Bash(git init *)",
       "Bash(git config *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(npm run *)"
     ]
   }
 }
