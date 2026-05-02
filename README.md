@@ -2,9 +2,12 @@
 
 Liquid staking dApp built on **LitVM LiteForge Testnet** — stake zkLTC, receive stLTC, earn yield.
 
+🔗 **Live app:** https://lit-stake-protocol.vercel.app
+
 ![LitVM](https://img.shields.io/badge/Network-LitVM%20LiteForge-64BFD3?style=flat-square)
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square)
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?style=flat-square)
+![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=flat-square&logo=vercel)
 
 ## What is it?
 
