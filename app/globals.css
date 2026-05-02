@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --litvm-teal:    #64BFD3;
+  --litvm-dark:    #1A616E;
+  --litvm-navy:    #1A2A40;
+  --litvm-wine:    #302326;
+  --litvm-heading: #D0E9FF;
+  --card-bg:       rgba(26, 42, 64, 0.65);
+  --card-border:   rgba(100, 191, 211, 0.2);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #1A616E 0%, #1A2A40 45%, #302326 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #fff;
+  font-family: var(--font-sans), 'Outfit', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── Grid overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(100,191,211,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100,191,211,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 0%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Ambient glow blobs ── */
+.glow-blob-1 {
+  position: fixed;
+  top: -10%;
+  left: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(100,191,211,0.12) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-blob-2 {
+  position: fixed;
+  bottom: -15%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(48,35,38,0.4) 0%, rgba(100,191,211,0.06) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Glass card ── */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(100,191,211,0.35);
+  box-shadow: 0 0 24px rgba(100,191,211,0.1);
+}
+
+.card-static {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+}
+
+/* ── Input ── */
+.input-field {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(100,191,211,0.15);
+  border-radius: 14px;
+  color: white;
+  font-size: 1.25rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-sans), sans-serif;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: rgba(100,191,211,0.5);
+  box-shadow: 0 0 0 3px rgba(100,191,211,0.08);
+}
+
+.input-field::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+/* ── Teal primary button ── */
+.btn-primary {
+  background: linear-gradient(135deg, #64BFD3 0%, #1A616E 100%);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 14px;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(100,191,211,0.25), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.92;
+  box-shadow: 0 6px 28px rgba(100,191,211,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Shimmer text ── */
+.text-shimmer {
+  background: linear-gradient(90deg, #64BFD3 0%, #D0E9FF 40%, #64BFD3 60%, #D0E9FF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(100,191,211,0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(100,191,211,0.4); }
+
+/* ── Divider ── */
+.teal-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(100,191,211,0.3), transparent);
+}
