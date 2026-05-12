@@ -32,9 +32,9 @@ export function Footer() {
             className="flex items-center gap-1.5 hover:text-primary transition-colors">
             <Droplet className="h-4 w-4" /> Faucet
           </a>
-          <a href="https://github.com/zorba999/LitStake-Protocol" target="_blank" rel="noopener noreferrer"
+          <a href="https://liteforge.hub.caldera.xyz/" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-1.5 hover:text-primary transition-colors">
-            <GitBranch className="h-4 w-4" /> GitHub
+            <GitBranch className="h-4 w-4" /> Bridge
           </a>
           <a href="https://x.com/LitStake" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-1.5 hover:text-primary transition-colors">
