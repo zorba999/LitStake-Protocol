@@ -5,11 +5,26 @@ import { useStaking } from '@/hooks/useStaking'
 import { useAccount, useChainId } from 'wagmi'
 import { formatEther, parseEther } from 'viem'
 import { ArrowDownUp, Loader2, Sparkles, ExternalLink } from 'lucide-react'
-import { litVMTestnet } from '@/lib/chains'
+import { litVMTestnet, EXPLORER_URL } from '@/lib/chains'
 
 type Tab = 'stake' | 'unstake'
 
 const fmt = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 6, maximumFractionDigits: 6 })
+
+// Wallets often throw plain objects ({ code, message }) instead of Error instances
+function getErrorMessage(e: unknown): string {
+  const err = e as {
+    code?: number; shortMessage?: string; message?: string; details?: string
+    data?: { message?: string }; error?: { message?: string }; cause?: { code?: number }
+  } | null
+  if (err?.code === 4001 || err?.cause?.code === 4001) return 'Transaction rejected'
+  const msg =
+    err?.shortMessage || err?.details || err?.data?.message || err?.error?.message || err?.message ||
+    (typeof e === 'string' ? e : '') || (() => { try { return JSON.stringify(e) } catch { return '' } })() ||
+    'Transaction failed'
+  if (/reject|denied/i.test(msg)) return 'Transaction rejected'
+  return msg.length > 160 ? `${msg.slice(0, 160)}…` : msg
+}
 
 function shortenHash(hash: string) {
   return `${hash.slice(0, 10)}...${hash.slice(-8)}`
@@ -60,8 +75,8 @@ export function StakeCard() {
       setTxHash(hash)
       setAmount('')
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : String(e)
-      setError(msg.includes('rejected') ? 'Transaction rejected' : msg.slice(0, 120))
+      console.error('[LitStake] tx error:', e)
+      setError(getErrorMessage(e))
     } finally {
       setLoading(false)
     }
@@ -142,7 +157,7 @@ export function StakeCard() {
       {txHash && (
         <div className="mt-4 rounded-xl border border-success/30 bg-success/8 p-3 flex items-center justify-between">
           <p className="text-success text-sm font-display font-semibold">Transaction sent!</p>
-          <a href={`https://liteforge.explorer.caldera.xyz/tx/${txHash}`} target="_blank" rel="noopener noreferrer"
+          <a href={`${EXPLORER_URL}/tx/${txHash}`} target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-1 text-xs text-primary hover:text-foreground font-mono transition-colors">
             {shortenHash(txHash)} <ExternalLink className="h-3 w-3" />
           </a>
@@ -175,7 +190,7 @@ export function StakeCard() {
           <div className="mb-3 flex items-center justify-between">
             <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-primary">Your Position</span>
             {address && (
-              <a href={`https://liteforge.explorer.caldera.xyz/address/${address}`} target="_blank" rel="noopener noreferrer"
+              <a href={`${EXPLORER_URL}/address/${address}`} target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors font-body">
                 explorer <ExternalLink className="h-3 w-3" />
               </a>

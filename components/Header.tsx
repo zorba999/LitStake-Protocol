@@ -5,7 +5,7 @@ import { injected } from 'wagmi/connectors'
 import { useState, useEffect } from 'react'
 import { Wallet, Compass, Droplet, BookOpen } from 'lucide-react'
 import { Logo } from './Logo'
-import { litVMTestnet } from '@/lib/chains'
+import { litVMTestnet, EXPLORER_URL } from '@/lib/chains'
 
 const LITVM_HEX = `0x${litVMTestnet.id.toString(16)}`
 
@@ -62,7 +62,7 @@ export function Header() {
         {/* Nav */}
         <nav className="hidden md:flex items-center gap-1">
           {[
-            { icon: Compass,  label: 'Explorer', href: 'https://liteforge.explorer.caldera.xyz' },
+            { icon: Compass,  label: 'Explorer', href: EXPLORER_URL },
             { icon: Droplet,  label: 'Faucet',   href: 'https://liteforge.hub.caldera.xyz' },
             { icon: BookOpen, label: 'Docs',      href: 'https://docs.litvm.com' },
           ].map(({ icon: Icon, label, href }) => (
@@ -98,7 +98,7 @@ export function Header() {
                     <p className="text-xs text-muted-foreground font-display tracking-widest uppercase">Connected</p>
                     <p className="text-sm font-display font-semibold text-foreground mt-0.5">{truncate(address)}</p>
                   </div>
-                  <a href={`https://liteforge.explorer.caldera.xyz/address/${address}`} target="_blank" rel="noopener noreferrer"
+                  <a href={`${EXPLORER_URL}/address/${address}`} target="_blank" rel="noopener noreferrer"
                     onClick={() => setShowMenu(false)}
                     className="flex items-center gap-2 px-4 py-2.5 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors font-body">
                     View on Explorer ↗

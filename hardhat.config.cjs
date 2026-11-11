@@ -11,7 +11,7 @@ module.exports = {
   },
   networks: {
     liteforge: {
-      url: process.env.LITEFORGE_RPC_URL || '',
+      url: process.env.LITEFORGE_RPC_URL || 'https://rpc.testnet.liteforge.zeeve.net',
       accounts: process.env.PRIVATE_KEY ? [`0x${process.env.PRIVATE_KEY}`] : [],
       chainId: 4441,
     },

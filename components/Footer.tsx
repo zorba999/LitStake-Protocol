@@ -1,4 +1,5 @@
 import { GitBranch, Compass, Droplet } from 'lucide-react'
+import { EXPLORER_URL } from '@/lib/chains'
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -24,7 +25,7 @@ export function Footer() {
           </span>
         </div>
         <div className="flex items-center gap-5 text-sm text-muted-foreground font-body">
-          <a href="https://liteforge.explorer.caldera.xyz" target="_blank" rel="noopener noreferrer"
+          <a href={EXPLORER_URL} target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-1.5 hover:text-primary transition-colors">
             <Compass className="h-4 w-4" /> Explorer
           </a>

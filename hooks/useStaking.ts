@@ -1,46 +1,20 @@
 'use client'
 
-import { useAccount, useBalance, useReadContracts, useWriteContract } from 'wagmi'
+import { useAccount, useBalance, useReadContracts, useSwitchChain, useWriteContract } from 'wagmi'
 import { parseEther } from 'viem'
 import { STAKING_ADDRESS, STAKING_ABI, STLTC_ADDRESS, STLTC_ABI } from '@/lib/contracts'
 import { litVMTestnet } from '@/lib/chains'
 
-const LITVM_CHAIN_HEX = `0x${litVMTestnet.id.toString(16)}`
+export function useStaking() {
+  const { address, chainId: walletChainId } = useAccount()
+  const { switchChainAsync } = useSwitchChain()
 
-// Force MetaMask to switch to LitVM before any transaction
-async function ensureLitVMNetwork() {
-  const eth = (window as unknown as {
-    ethereum?: { request: (args: { method: string; params?: unknown[] }) => Promise<unknown> }
-  }).ethereum
-  if (!eth) throw new Error('No wallet found')
-
-  try {
-    await eth.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: LITVM_CHAIN_HEX }],
-    })
-  } catch (err: unknown) {
-    // Chain not added yet (error code 4902) → add it first
-    const code = (err as { code?: number })?.code
-    if (code === 4902) {
-      await eth.request({
-        method: 'wallet_addEthereumChain',
-        params: [{
-          chainId: LITVM_CHAIN_HEX,
-          chainName: litVMTestnet.name,
-          nativeCurrency: litVMTestnet.nativeCurrency,
-          rpcUrls: [litVMTestnet.rpcUrls.default.http[0]],
-          blockExplorerUrls: [litVMTestnet.blockExplorers.default.url],
-        }],
-      })
-    } else {
-      throw err
+  // Switch the *connected* wallet to LitVM (wagmi adds the chain if missing)
+  const ensureLitVMNetwork = async () => {
+    if (walletChainId !== litVMTestnet.id) {
+      await switchChainAsync({ chainId: litVMTestnet.id })
     }
   }
-}
-
-export function useStaking() {
-  const { address } = useAccount()
 
   const { data: nativeBalance } = useBalance({
     address,

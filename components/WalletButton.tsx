@@ -3,7 +3,7 @@
 import { useAccount, useConnect, useDisconnect, useChainId } from 'wagmi'
 import { injected } from 'wagmi/connectors'
 import { useState, useEffect } from 'react'
-import { litVMTestnet } from '@/lib/chains'
+import { litVMTestnet, EXPLORER_URL } from '@/lib/chains'
 
 const LITVM_CHAIN_HEX = `0x${litVMTestnet.id.toString(16)}`
 
@@ -102,7 +102,7 @@ export function WalletButton() {
                 <p className="text-sm font-display font-semibold text-litvm-heading mt-0.5">{truncate(address)}</p>
               </div>
               <a
-                href={`https://liteforge.explorer.caldera.xyz/address/${address}`}
+                href={`${EXPLORER_URL}/address/${address}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2.5 text-sm text-white/60 hover:text-litvm-teal hover:bg-litvm-teal/5 transition-colors"

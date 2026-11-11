@@ -30,9 +30,9 @@ LitStake is a liquid staking protocol on LitVM — the first EVM-compatible Laye
 |-----------|-------|
 | Network Name | LitVM LiteForge Testnet |
 | Chain ID | 4441 |
-| RPC URL | `https://liteforge.rpc.caldera.xyz/http` |
+| RPC URL | `https://rpc.testnet.liteforge.zeeve.net` |
 | Currency | zkLTC |
-| Explorer | https://liteforge.explorer.caldera.xyz |
+| Explorer | https://explorer.testnet.liteforge.zeeve.net |
 
 ## Tech Stack
 
@@ -97,7 +97,7 @@ Exchange rate formula: `rate = totalAssets * 1e18 / stLTC.totalSupply()`
 ```bash
 # Add your private key to .env.local
 PRIVATE_KEY=your_key_here
-LITEFORGE_RPC_URL=https://liteforge.rpc.caldera.xyz/http
+LITEFORGE_RPC_URL=https://rpc.testnet.liteforge.zeeve.net
 
 npx hardhat run scripts/deploy.cjs --network liteforge
 ```
@@ -105,5 +105,5 @@ npx hardhat run scripts/deploy.cjs --network liteforge
 ## Links
 
 - [LitVM Docs](https://docs.litvm.com)
-- [LiteForge Explorer](https://liteforge.explorer.caldera.xyz)
+- [LiteForge Explorer](https://explorer.testnet.liteforge.zeeve.net)
 - [LiteForge Faucet](https://liteforge.hub.caldera.xyz)
